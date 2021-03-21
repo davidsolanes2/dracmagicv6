@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
     	<li class="nav-item" sec:authorize="hasAnyAuthority('USUARIO')">
-       		<a class="nav-link" th:href="@{/principal/indexPaginate}">Menu</a>
+       		<a class="nav-link" th:href="@{/principal/index}">Menu</a>
        								<!-- [@RequestMapping / Metodo] del controller Principal  -->
 		</li>
 
@@ -34,7 +34,7 @@
 	</div>	    
     <div sec:authorize="isAuthenticated()">
 		<span class="text-light">Bienvenido</span>&nbsp;<span class="text-light" sec:authentication="name"></span>&nbsp;
-		<a class="btn btn-primary" th:href="@{/logout}">Salir</a>
+<!-- 		<a class="btn btn-primary" th:href="@{/logout}">Salir</a> -->
 	</div>    
   </div>
 </nav>     
