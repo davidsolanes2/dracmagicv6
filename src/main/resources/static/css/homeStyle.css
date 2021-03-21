@@ -1,7 +1,10 @@
 @charset "UTF-8";
 
-#content
- {
-	background-color: blanchedalmond;
+#content {
+	background-color: blanchedalmond !important;
 }
 
+.container{
+	margin-top: 7% !important;
+ 	width: 90% !important;
+}
