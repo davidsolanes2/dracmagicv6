@@ -16,10 +16,10 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	List<User> findByFechaRegistroNotNull();
 	
 	@Modifying
-    @Query("UPDATE Usuario u SET u.estatus=0 WHERE u.id = :paramIdUsuario")
-    int lock(@Param("paramIdUsuario") int idUsuario);
+    @Query("UPDATE User u SET u.estatus=0 WHERE u.id = :paramIdUser")
+    int lock(@Param("paramIdUser") int idUser);
 	
 	@Modifying
-    @Query("UPDATE Usuario u SET u.estatus=1 WHERE u.id = :paramIdUsuario")
-	int unlock(@Param("paramIdUsuario") int idUsuario);
+    @Query("UPDATE User u SET u.estatus=1 WHERE u.id = :paramIdUser")
+	int unlock(@Param("paramIdUser") int idUser);
 }
