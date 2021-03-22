@@ -1,4 +1,4 @@
-<!-- <aside  th:insert="fragments/header :: header"></aside> -->
+
 <div th:fragment="sidebar" class="wrapper">
     <!-- Sidebar  -->
     <nav id="sidebar">
@@ -49,10 +49,9 @@
 
     <!-- Page Content  -->
     <div id="content">
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-info">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary" style="margin-left: 2%;">
                     <i class="fas fa-align-left"></i>
                     <span>Menu</span>
                 </button>
@@ -61,16 +60,14 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-align-justify"></i>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link"  th:href="@{/logout}">Log out</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                
+                <div class="collapse navbar-collapse" id="navbarsExample_2">
+	 				<a class="btn btn-primary" th:href="@{/logout}">Salir</a> 
+  				</div>
+
         </nav>
     </div>
+    
 </div>
 <div class="overlay"></div>
-<!-- <footer th:insert="fragments/footer :: footer"></footer> -->
+<footer th:insert="fragments/footer :: footer"></footer>
