@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	
+
+
+		<aside th:insert="fragments/header :: header"></aside>
+		
 	<body>
-		<aside  th:insert="fragments/header :: header"></aside>
-		<nav th:insert="fragments/menu :: menu-principal"></nav>
+		
+		
+		<aside th:insert="fragments/menu :: menu-principal"></aside>
 
 	    <main role="main">
 	
@@ -22,6 +26,8 @@
 		      </div> <!-- /container -->
 
     	</main>
-    	<footer th:insert="fragments/footer :: footer"></footer>
+    	
+    	<aside th:insert="fragments/footer :: footer"></aside>
+	
 	</body>
 </html>
