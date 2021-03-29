@@ -1,14 +1,56 @@
 
 <aside th:fragment="sidebar">
-	
+		<link  href="../../static/css/dropdownMenu.css" th:href="@{/css/dropdownMenu.css}" rel="stylesheet">
 		<div id="mySidenav" class="sidenav">
 		  	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
 		  		&times;
 		  	</a>
-		  	<a href="#">About</a>
-		  	<a href="#">Services</a>
-		  	<a href="#">Clients</a>
-		  	<a href="#">Contact</a>
+		  	
+		  	<ul>
+		  		<li>
+		  		<div class="dropdown">
+			        <button class="dropbtn">Alumnes</button>
+			        <div class="dropdown-content">
+			          <a href="#">Altes/Modificacions</a>
+			          <a href="#">Baixes</a>
+			          <a href="#">Llistats</a>
+			        </div>
+			    </div>
+			    </li>
+			    <br>
+			    <li>
+		  		<div class="dropdown">
+			        <button class="dropbtn">Tutors</button>
+			        <div class="dropdown-content">
+			          <a href="#">Altes/Modificacions</a>
+			          <a href="#">Baixes</a>
+			          <a href="#">Llistats</a>
+			        </div>
+			    </div>
+			    </li>
+			    <br>
+			    <li>
+		  		<div class="dropdown">
+			        <button class="dropbtn">Usuaris</button>
+			        <div class="dropdown-content">
+			          <a href="#">Altes/Modificacions</a>
+			          <a href="#">Baixes</a>
+			          <a href="#">Llistats</a>
+			        </div>
+			    </div>
+			    </li>
+			    <br>
+			    <li>
+            	<div class="dropdown">
+			        <button class="dropbtn">Gestio</button>
+			        <div class="dropdown-content">
+			          <a href="#">Altes/Modificacions</a>
+			          <a href="#">Baixes</a>
+			          <a href="#">Llistats</a>
+			        </div>
+			    </div>
+			    </li>
+            </ul>
 		</div>
 	
 		
