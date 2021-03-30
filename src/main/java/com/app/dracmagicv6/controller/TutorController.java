@@ -5,11 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/principal")
-public class PrincipalController {
+@RequestMapping("/tutors")
+public class TutorController {
 
 		@GetMapping("/index")
 		public String mostrarIndex() {
-			return "principal/sidebar";
+			return "tutors/tutorsIndex";
 		}
+		
 }

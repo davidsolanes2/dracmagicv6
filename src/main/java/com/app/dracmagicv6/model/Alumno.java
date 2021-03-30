@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="alumno")
@@ -29,7 +30,9 @@ public class Alumno {
 	private String direccion;
 	private String codigo_postal;
 	private String poblacion;
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date fecha_alta;
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date fecha_baja;
 
 	//private tutores_id tutores;
