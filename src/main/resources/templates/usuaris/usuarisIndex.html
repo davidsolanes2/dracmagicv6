@@ -2,11 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<title>Tutors</title>
+		<aside th:insert="fragments/header :: header"></aside>
+		<title>Usuaris</title>
 	</head>
 	<body>
-		<div>
-			<h1>Vista de la pantalla de Altas/Modificaciones de Usuaris</h1>
+		<div class="container my-2">
+		<h1>Llista d'Usuaris</h1>
+		<a th:href ="@{/signup}" class="btn btn-primary btn-sm mb-3">Alta Usuario</a>
+			<table class="table table-dark table-hover table-responsive-md">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Apellidos</th>
+						<th>Nombre Usuario</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user : ${listUser}">
+						<td th:text="${user.firstName}"></td>
+						<td th:text="${user.lastName}"></td>
+						<td th:text="${user.username}"></td>
+						<td th:text="${user.email}"></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</body>
 </html>

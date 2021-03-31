@@ -11,6 +11,7 @@ public interface IUserService {
 	
 	List<User> buscarTodos();
 	List<User> buscarRegistrados();
+	List<User> getAllUsers();
 	
 	User buscarPorId(Integer idUser);
 	User buscarPorUsername(String username);

@@ -1,7 +1,5 @@
 package com.app.dracmagicv6.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.app.dracmagicv6.model.User;
 import com.app.dracmagicv6.service.IUserService;
 
 @Controller
@@ -26,12 +23,25 @@ public class UserController {
 	 * @param page
 	 * @return
 	 */
+//    @GetMapping("/index")
+//	public String mostrarIndex(Model model) {
+//    	List<User> lista = serviceUser.buscarRegistrados();
+//    	model.addAttribute("listuser", lista);
+//		return "user/usuarisIndex";
+//	}
+
     @GetMapping("/index")
-	public String mostrarIndex(Model model) {
-    	List<User> lista = serviceUser.buscarRegistrados();
-    	model.addAttribute("user", lista);
-		return "user/listUser";
-	}
+    public String viewList(Model model) {
+    	model.addAttribute( "listUser" , serviceUser.getAllUsers());
+    	return "usuaris/usuarisIndex";
+    }
+    
+//    List<User> buscarTodos();
+//    
+//    @Override
+//	public List<User> buscarTodos() {
+//		return userRepo.findAll();
+//	}
     
     /**
      * Método para eliminar un usuario de la base de datos.

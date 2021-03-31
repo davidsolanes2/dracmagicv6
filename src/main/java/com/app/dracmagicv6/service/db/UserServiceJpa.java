@@ -31,6 +31,11 @@ public class UserServiceJpa implements IUserService{
 	public List<User> buscarTodos() {
 		return userRepo.findAll();
 	}
+	
+	@Override
+	public List<User> getAllUsers() {
+		return userRepo.findAll();
+	}
 
 	@Override
 	public User buscarPorId(Integer idUser) {
