@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +15,7 @@ import com.app.dracmagicv6.repository.UserRepository;
 import com.app.dracmagicv6.service.IUserService;
 
 @Service
+@Primary
 public class UserServiceJpa implements IUserService{
 
 	@Autowired
@@ -26,15 +30,25 @@ public class UserServiceJpa implements IUserService{
 	public void eliminar(Integer idUser) {
 		userRepo.deleteById(idUser);
 	}
-
+	
 	@Override
 	public List<User> buscarTodos() {
 		return userRepo.findAll();
+	}
+
+	@Override
+	public Page<User> buscarTodos(Pageable page) {
+		return userRepo.findAll(page);
 	}
 	
 	@Override
 	public List<User> getAllUsers() {
 		return userRepo.findAll();
+	}
+	
+	@Override
+	public Page<User> getAllUsers(Pageable page) {
+		return userRepo.findAll(page);
 	}
 
 	@Override

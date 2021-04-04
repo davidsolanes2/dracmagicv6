@@ -109,6 +109,38 @@ public class HomeController {
 		return "formLogin";
 	}
 	
+	@GetMapping("/saveUsuaris")
+	public String registrarUser(User user) {
+		return "formRegistro";
+	}  
+    
+    @PostMapping("/saveUsuaris")
+	public String guardarUser(User user, RedirectAttributes attributes) {
+		// Recuperamos el password en texto plano
+		String pwdPlano = user.getPassword();
+		// Encriptamos el pwd BCryptPasswordEncoder
+		String pwdEncriptado = passwordEncoder.encode(pwdPlano); 
+		// Hacemos un set al atributo password (ya viene encriptado)
+		user.setPassword(pwdEncriptado);	
+		user.setEstatus(1); // Activado por defecto
+		user.setFechaRegistro(new Date()); // Fecha de Registro, la fecha actual del servidor
+		
+		// Creamos el Role que le asignaremos al usuario nuevo
+		Role role = new Role();
+		role.setId(3); // Role USUARIO
+		user.agregar(role);
+		
+		/**
+		 * Guardamos el usuario en la base de datos. El Perfil se guarda automaticamente
+		 */
+		serviceUser.guardar(user);
+				
+		attributes.addFlashAttribute("msg", "Los datos han sido guardados.");
+		
+		return "user/index";
+	}
+	
+	
 	/**
 	 * Método personalizado para cerrar la sesión del usuario
 	 * @param request

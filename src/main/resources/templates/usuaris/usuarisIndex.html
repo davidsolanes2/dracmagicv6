@@ -7,26 +7,38 @@
 	</head>
 	<body>
 		<div class="container my-2">
-		<h1>Llista d'Usuaris</h1>
-		<a th:href ="@{/signup}" class="btn btn-primary btn-sm mb-3">Alta Usuario</a>
-			<table class="table table-dark table-hover table-responsive-md">
-				<thead>
-					<tr>
-						<th>Nombre</th>
-						<th>Apellidos</th>
-						<th>Nombre Usuario</th>
-						<th>Email</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="user : ${listUser}">
-						<td th:text="${user.firstName}"></td>
-						<td th:text="${user.lastName}"></td>
-						<td th:text="${user.username}"></td>
-						<td th:text="${user.email}"></td>
-					</tr>
-				</tbody>
-			</table>
+			<h1>Llista d'Usuaris</h1>
+				<a th:href ="@{/saveUsuaris}" class="btn btn-primary btn-sm mb-3">Alta Usuario</a>
+					<table class="table table-dark table-hover table-responsive-md">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Apellidos</th>
+								<th>Nombre Usuario</th>
+								<th>Email</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="user : ${listUser}">
+								<td th:text="${user.firstName}"></td>
+								<td th:text="${user.lastName}"></td>
+								<td th:text="${user.username}"></td>
+								<td th:text="${user.email}"></td>
+								<td>
+									<a class="btn btn-primary btn-sm">Modificar</a>
+									<a class="btn btn-danger btn-sm">Eliminar</a>	
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<nav th:if="${listUser.totalPages > 0}" aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item"><a th:href="@{/user/indexPaginate(page=${listUser.number - 1})}" class="page-link">Anterior</a></li>
+							<li class="page-item"><a th:href="@{/user/indexPaginate(page=${listUser.number + 1})}" class="page-link">Siguiente</a></li>
+						</ul>
+					</nav>
+					
+				<a th:href ="@{/index}" class="btn btn-primary btn-sm mb-3">Tornar</a>
 		</div>
 	</body>
 </html>

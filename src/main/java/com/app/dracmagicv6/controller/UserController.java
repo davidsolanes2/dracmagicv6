@@ -1,6 +1,10 @@
 package com.app.dracmagicv6.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.app.dracmagicv6.model.User;
 import com.app.dracmagicv6.service.IUserService;
 
 @Controller
@@ -17,24 +22,34 @@ public class UserController {
 	@Autowired
 	private IUserService serviceUser;
 	
-    /**
-	 * Metodo que muestra la lista de usuarios sin paginacion
-	 * @param model
-	 * @param page
-	 * @return
-	 */
-//    @GetMapping("/index")
-//	public String mostrarIndex(Model model) {
-//    	List<User> lista = serviceUser.buscarRegistrados();
-//    	model.addAttribute("listuser", lista);
-//		return "user/usuarisIndex";
-//	}
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/index")
-    public String viewList(Model model) {
-    	model.addAttribute( "listUser" , serviceUser.getAllUsers());
+	 @GetMapping("/index")
+	 public String viewList(Model model) {
+	    List<User> lista = serviceUser.buscarTodos();
+	   	model.addAttribute( "listUser" , lista);
+	   	return "usuaris/usuarisIndex";
+	 }
+	
+	
+    @GetMapping(value= "/indexPaginate")
+    public String viewListPaginate(Model model, Pageable page) {
+    	Page<User> lista = serviceUser.buscarTodos(page);
+    	model.addAttribute( "listUser" , lista);
     	return "usuaris/usuarisIndex";
     }
+    
+    
+    
+//    public String usuarisForm(Model model) {
+//    	User user = new User();
+//    	model.addAttribute("user", user);
+//    	return "new_user";
+//    }
+//    
+    
+    
     
 //    List<User> buscarTodos();
 //    
