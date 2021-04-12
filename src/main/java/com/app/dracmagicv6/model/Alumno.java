@@ -1,9 +1,9 @@
 package com.app.dracmagicv6.model;
 
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,8 +13,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -34,55 +32,24 @@ public class Alumno {
 	private Date fecha_alta;
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date fecha_baja;
-
-	//private tutores_id tutores;
-	//private hermano_de hermano_de;
-	//private informes_id informes;
-
 	
-	/*
-	 * @ManyToMany(fetch = FetchType.EAGER) Set<Telefono> likes_1;
-	 * 
-	 * @JoinTable(name = "Telefonos_likes", joinColumns = @JoinColumn(name =
-	 * "idTelefono"), inverseJoinColumns = @JoinColumn(name = "idAlumno"))
-	 * 
-	 * @ManyToMany(fetch = FetchType.EAGER) Set<Foto> likes_2;
-	 * 
-	 * @JoinTable(name = "Fotos_likes", joinColumns = @JoinColumn(name = "idFoto"),
-	 * inverseJoinColumns = @JoinColumn(name = "idAlumno"))
-	 */
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "alumnos_clases", joinColumns = @JoinColumn(name = "alumno_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "clase_id", referencedColumnName = "id"))
+	private List<Clase> clases;
 	
-	@LazyCollection(LazyCollectionOption.FALSE)
-	//@ManyToMany(fetch = FetchType.EAGER)
-	@ManyToMany
-	@JoinTable(name="AlumnoTelefono",
-				joinColumns = @JoinColumn(name = "idAlumno"),
-				inverseJoinColumns = @JoinColumn(name="idTelefono")
-			)
-	private List<Telefono> telefonos;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "alumnos_tutors", joinColumns = @JoinColumn(name = "alumno_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tutor_id", referencedColumnName = "id"))
+	private List<Tutor> tutors;
 	
-	@LazyCollection(LazyCollectionOption.FALSE)
-	//@ManyToMany(fetch = FetchType.EAGER)
-	@ManyToMany
-	@JoinTable(name="AlumnoFotos",
-				joinColumns = @JoinColumn(name = "idAlumno"),
-				inverseJoinColumns = @JoinColumn(name = "idFoto")
-			)
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "alumnos_fotos", joinColumns = @JoinColumn(name = "alumno_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "foto_id", referencedColumnName = "id"))
 	private List<Foto> fotos;
 	
-	public void agregarTelefono( Telefono tempTelefono) {
-		if (telefonos == null) {
-			telefonos = new LinkedList<Telefono>();
-		}
-		telefonos.add(tempTelefono);
-	}
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "alumnos_informes", joinColumns = @JoinColumn(name = "alumno_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "informe_id", referencedColumnName = "id"))
+	private List<Informe> informes;
 	
-	public void agregarFoto( Foto tempFoto) {
-		if (fotos == null) {
-			fotos = new LinkedList<Foto>();
-		}
-		fotos.add(tempFoto);
-	}
+	/**/
 	
 	public Integer getId() {
 		return id;
@@ -132,11 +99,17 @@ public class Alumno {
 	public void setFecha_baja(Date fecha_baja) {
 		this.fecha_baja = fecha_baja;
 	}
-	public List<Telefono> getTelefonos() {
-		return telefonos;
+	public List<Clase> getClases() {
+		return clases;
 	}
-	public void setTelefonos(List<Telefono> telefonos) {
-		this.telefonos = telefonos;
+	public void setClases(List<Clase> clases) {
+		this.clases = clases;
+	}
+	public List<Tutor> getTutors() {
+		return tutors;
+	}
+	public void setTutors(List<Tutor> tutors) {
+		this.tutors = tutors;
 	}
 	public List<Foto> getFotos() {
 		return fotos;
@@ -144,11 +117,20 @@ public class Alumno {
 	public void setFotos(List<Foto> fotos) {
 		this.fotos = fotos;
 	}
-
+	public List<Informe> getInformes() {
+		return informes;
+	}
+	public void setInformes(List<Informe> informes) {
+		this.informes = informes;
+	}
 	@Override
 	public String toString() {
 		return "Alumno [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion
 				+ ", codigo_postal=" + codigo_postal + ", poblacion=" + poblacion + ", fecha_alta=" + fecha_alta
-				+ ", fecha_baja=" + fecha_baja + ", telefonos=" + telefonos + ", fotos=" + fotos + "]";
+				+ ", fecha_baja=" + fecha_baja + ", clases=" + clases + ", tutors=" + tutors + ", fotos=" + fotos
+				+ ", informes=" + informes + "]";
 	}
+
+	
+	
 }

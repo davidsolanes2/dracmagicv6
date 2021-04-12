@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<body>
+		<aside  th:insert="fragments/header :: header"></aside>
+		<nav th:insert="fragments/menu :: menu-principal"></nav>
+		<main role="main">     
+	      <hr>
+	      <div class="container"> 
+	
+	        <div class="card">
+	          <h4 class="card-header"><strong>Formulario de alta de Alumnos</strong></h4>              
+	          <div class="card-body">
+	            <form th:action="@{/saveAlumnes}" th:object="${alumno}" method="post">              
+	              <div class="row">
+	                <div class="col-md-3"> 
+	                  <div class="form-group">
+	                    <label for="nombre">Nombre</label>
+	                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" placeholder="Su nombre" required="required">
+	                  	<label for="lastName">Apellidos</label>
+	                    <input type="text" class="form-control" th:field="*{apellidos}" id="apellidos" name="apellidos" placeholder="Su apellido" required="required">
+	                  </div>
+	                </div>
+	                <div class="col-md-3"> 
+	                  <div class="form-group">
+	                    <label for="direccion">Direccion</label>
+	                    <input type="text" class="form-control" th:field="*{direccion}" id="direccion" name="direccion" placeholder="Su dirección" required="required">
+	                  </div>
+	                  <div class="form-group">
+	                    <label for="cp">Codigo Postal</label>
+	                    <input type="text" class="form-control" th:field="*{codigo_postal}" id="cp" name="cp" placeholder="Su código postal" required="required">
+	                  <label for="poblacion">Poblacion</label>
+	                    <input type="text" class="form-control" th:field="*{poblacion}" id="poblacion" name="poblacion" placeholder="Su población" required="required">
+	                  </div>  
+	                </div>    
+	                <div class="col-md-3"> 
+	                  <div class="form-group">
+	                    <label for="fecha_alta">Fecha de Alta</label>
+	                    <input type="text" class="form-control" th:field="*{fecha_alta}" id="fecha_alta" name="fecha_alta" placeholder="Fecha de Alta" required="required">
+	                  	<label for="fecha_baja">Fecha de Baja</label>
+	                    <input type="text" class="form-control" th:field="*{fecha_baja}" id="fecha_baja" name="fecha_baja" placeholder="Fecha de Baja" required="required">
+	                  </div>
+	                </div>
+	                <div class="col-md-3"> 
+	                  <div class="form-group">
+	                    
+	                  </div>
+	                </div>
+	              </div>                  
+	              <hr>
+	              	
+	              		<button type="submit" class="btn btn-primary">Guardar</button>
+	              		<a th:href ="@{/alumnes/indexPaginate}" class="btn btn-primary">Tornar</a>
+	              		
+	              		           
+	            </form>
+	           
+	          </div>
+	        </div>
+	      </div> <!-- /container -->
+
+        </main>
+	</body>
+	
+</html>

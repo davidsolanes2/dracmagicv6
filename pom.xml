@@ -14,7 +14,9 @@
 	<name>dracmagicv6</name>
 	<description>Gestion Parvulario</description>
 	<properties>
+		<bootstrap.version>4.5.3</bootstrap.version>
 		<java.version>11</java.version>
+		<lombok.version>1.18.18</lombok.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -63,7 +65,7 @@
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
-			<version>4.5.3</version>
+			<version>${bootstrap.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -74,6 +76,12 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>webjars-locator-core</artifactId>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
 		
 	</dependencies>
 

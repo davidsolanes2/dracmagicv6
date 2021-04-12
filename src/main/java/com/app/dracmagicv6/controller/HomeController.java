@@ -11,19 +11,27 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.app.dracmagicv6.model.Alumno;
 import com.app.dracmagicv6.model.Role;
 import com.app.dracmagicv6.model.User;
-import com.app.dracmagicv6.service.IUserService;
+import com.app.dracmagicv6.service.AlumnoService;
+import com.app.dracmagicv6.service.UserService;
 
 @Controller
 public class HomeController {
 
 	@Autowired
-	private IUserService serviceUser;
+	private UserService service;
+	
+	@Autowired
+	private AlumnoService serviceAlumno;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -50,7 +58,7 @@ public class HomeController {
 		}
 		
 		if (session.getAttribute("user") == null){
-			User user = serviceUser.buscarPorUsername(username);	
+			User user = service.buscarPorUsername(username);	
 			//System.out.println("Usuario: " + usuario);
 			session.setAttribute("user", user);
 		}
@@ -93,7 +101,7 @@ public class HomeController {
 		/**
 		 * Guardamos el usuario en la base de datos. El Perfil se guarda automaticamente
 		 */
-		serviceUser.guardar(user);
+		service.guardar(user);
 				
 		attributes.addFlashAttribute("msg", "Has sido registrado. ¡Ahora puedes ingresar al sistema!");
 		
@@ -111,7 +119,7 @@ public class HomeController {
 	
 	@GetMapping("/saveUsuaris")
 	public String registrarUser(User user) {
-		return "formRegistro";
+		return "usuaris/usuarisForm";
 	}  
     
     @PostMapping("/saveUsuaris")
@@ -129,18 +137,58 @@ public class HomeController {
 		Role role = new Role();
 		role.setId(3); // Role USUARIO
 		user.agregar(role);
-		
+	
 		/**
 		 * Guardamos el usuario en la base de datos. El Perfil se guarda automaticamente
 		 */
-		serviceUser.guardar(user);
-				
-		attributes.addFlashAttribute("msg", "Los datos han sido guardados.");
-		
-		return "user/index";
+		service.guardar(user);
+				  
+		return "redirect:/usuaris/indexPaginate";
 	}
-	
-	
+    
+    //Atención averiguar por que solo me funciona en HomeController
+    @GetMapping("/saveAlumnes")
+	public String mostrarForm(Alumno alumno) {
+		return "alumnes/alumnesForm";
+	}
+    
+    
+    
+    @GetMapping("/showFormForUpdate/{id}")
+	public String UserUpdate(@PathVariable(value = "id") Integer id, Model model) {
+		User user = service.getUserById(id);
+		model.addAttribute("user", user);
+		return "usuaris/usuarisUpdate";
+	}
+    
+    @PostMapping("/showFormForUpdate/{id}")
+    public String updateUser(@RequestParam("id") Integer id, User user){
+    	
+  		String pwdPlano = user.getPassword();
+    	String pwdEncriptado = passwordEncoder.encode(pwdPlano); 
+    		// Hacemos un set al atributo password (ya viene encriptado)
+    	user.setPassword(pwdEncriptado);	
+   		user.setEstatus(1); // Activado por defecto
+ 		user.setFechaRegistro(new Date()); // Fecha de Registro, la fecha actual del servidor			
+ 			// Creamos el Role que le asignaremos al usuario nuevo
+    	Role role = new Role();
+ 		role.setId(3); // Role USUARIO
+ 		user.agregar(role); 		
+   			/**
+    		 * Guardamos el usuario en la base de datos. El Perfil se guarda automaticamente
+    		 */
+    		service.guardar(user);
+    	
+		return "redirect:/usuaris/indexPaginate";
+	}
+ 
+
+    @GetMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable (value= "id") Integer id, Model model) {
+    	this.service.deleteUserById(id);
+    	return "redirect:/usuaris/indexPaginate";
+    }
+    
 	/**
 	 * Método personalizado para cerrar la sesión del usuario
 	 * @param request

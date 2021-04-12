@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<body>
+		<aside  th:insert="fragments/header :: header"></aside>
+		<nav th:insert="fragments/menu :: menu-principal"></nav>
+		<main role="main">     
+	      <hr>
+	      <div class="container"> 
+	
+	        <div class="card">
+	          <h4 class="card-header"><strong>Formulario de Usuarios</strong></h4>              
+	          <div class="card-body">
+	            <form th:action="@{/showFormForUpdate/{id}}" th:object="${user}" method="post">              
+	              <div class="row">
+	                <div class="col-md-3"> 
+	                  <div class="form-group">
+	                  	<input type="hidden" th:field="*{id}">
+	                    <label for="nombre">Nombre</label>
+	                    <input type="text" class="form-control" th:field="*{firstName}" id="nombre" name="nombre">
+	                  	<label for="lastName">Apellidos</label>
+	                    <input type="text" class="form-control" th:field="*{lastName}" id="lastName" name="lastName">
+	                  </div>
+	                </div>
+	                <div class="col-md-3"> 
+	                  <div class="form-group">
+	                    <label for="email">Correo electrónico</label>
+	                    <input type="email" class="form-control" th:field="*{email}" id="email" name="email" placeholder="Su correo electrónico" readonly>
+	                  </div> 
+	                </div>    
+	                <div class="col-md-3"> 
+	                  <div class="form-group">
+	                    <label for="username">Username</label>
+	                    <input type="text" class="form-control" th:field="*{username}" id="username" name="username" placeholder="Su nombre de usuario" required="required">
+	                  	<label for="password">Password</label>
+	                    <input type="password" class="form-control" th:field="*{password}" id="password" name="password" placeholder="Su clave de acceso" required="required">
+	                  </div>
+	                </div>
+	                <div class="col-md-3"> 
+	                  <div class="form-group">
+	                    
+	                  </div>
+	                </div>
+	              </div>                  
+	              <hr>
+	              	
+	              		<button type="submit" class="btn btn-primary">Guardar</button>
+	              		<a th:href ="@{/usuaris/indexPaginate/}" class="btn btn-primary">Tornar</a>
+	              		
+	              		           
+	            </form>
+	           
+	          </div>
+	        </div>
+	      </div> <!-- /container -->
+
+        </main>
+	</body>
+	
+</html>

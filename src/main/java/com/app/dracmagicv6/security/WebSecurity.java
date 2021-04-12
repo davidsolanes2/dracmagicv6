@@ -47,6 +47,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
         .antMatchers("/", 
         			 "/login",
         			 "/signup",
+        			 "/usuaris/**",
+        			 "/alumnes/**",
         			 "/bcrypt/**",
         			 "/about").permitAll()
         
@@ -67,4 +69,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 	public PasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();
 	}
+	
+	
 }

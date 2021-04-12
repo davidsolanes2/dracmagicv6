@@ -8,43 +8,37 @@
 		  	
 		  	<ul>
 		  		<li>
-		  		<div class="dropdown">
-			        <button class="dropbtn">Alumnes</button>
-			        <div class="dropdown-content">
-			          <a th:href="@{/alumnes/index}">Altes/Modificacions</a>
-			          <a href="#">Baixes</a>
-			          <a href="#">Llistats</a>
+		  		<div class="dropdown dropright">
+			        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Alumnes</button>
+			        <div class="dropdown-menu">
+			          <a class="dropsown-item" th:href="@{/alumnes/indexPaginate}">Llistat d'Alumnes</a>
 			        </div>
 			    </div>
 			    </li>
 			    <br>
 			    <li>
-		  		<div class="dropdown">
-			        <button class="dropbtn">Tutors</button>
-			        <div class="dropdown-content">
-			          <a th:href="@{/tutors/index}">Altes/Modificacions</a>
-			          <a href="#">Baixes</a>
-			          <a href="#">Llistats</a>
+		  		<div class="dropdown dropright">
+			        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Tutors</button>
+			        <div class="dropdown-menu">
+			          <a th:href="@{/tutors/index}">Llistat de Tutors</a>
 			        </div>
 			    </div>
 			    </li>
 			    <br>
 			    <li>
-		  		<div class="dropdown">
-			        <button class="dropbtn">Usuaris</button>
-			        <div class="dropdown-content">
-			          <a th:href="@{/user/indexPaginate}">Altes/Modificacions/Baixes</a>
+		  		<div class="dropdown dropright">
+			        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Usuaris</button>
+			        <div class="dropdown-menu">
+			          <a th:href="@{/usuaris/indexPaginate}">Llistat d'Usuaris</a>
 			        </div>
 			    </div>
 			    </li>
 			    <br>
 			    <li>
-            	<div class="dropdown">
-			        <button class="dropbtn">Gestio</button>
-			        <div class="dropdown-content">
-			          <a th:href="@{/gestio/index}">Altes/Modificacions</a>
-			          <a href="#">Baixes</a>
-			          <a href="#">Llistats</a>
+            	<div class="dropdown dropright">
+			        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Gestio</button>
+			        <div class="dropdown-menu">
+			          <a th:href="@{/gestio/index}">Llistat de Gestio</a>
 			        </div>
 			    </div>
 			    </li>

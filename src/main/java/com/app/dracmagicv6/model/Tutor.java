@@ -1,11 +1,15 @@
 package com.app.dracmagicv6.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +23,14 @@ public class Tutor {
 	private String apellidos;
 	private Date fecha_alta;
 
+	@ManyToMany(mappedBy = "tutors")
+	private List<Alumno> alumnos;
+	
+	@ManyToOne
+	@JoinColumn(name="telefono_id")
+	private Telefono telefono;
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -51,17 +63,26 @@ public class Tutor {
 		this.fecha_alta = fecha_alta;
 	}
 
+	public List<Alumno> getAlumnos() {
+		return alumnos;
+	}
+
+	public void setAlumnos(List<Alumno> alumnos) {
+		this.alumnos = alumnos;
+	}
+
+	public Telefono getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(Telefono telefono) {
+		this.telefono = telefono;
+	}
+
 	@Override
 	public String toString() {
-		return "Tutores [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fecha_alta=" + fecha_alta
-				+ "]";
+		return "Tutor [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fecha_alta=" + fecha_alta
+				+ ", alumnos=" + alumnos + ", telefono=" + telefono + "]";
 	}
-	
-	
-	
-	/*
-	 * 
-	 * Añadir enum para rol padre o madre
-	 * 
-	 * */
+
 }

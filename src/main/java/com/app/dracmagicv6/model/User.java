@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -45,6 +46,11 @@ public class User {
 		@ManyToMany(fetch = FetchType.EAGER)
 		@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 		private List<Role> roles;
+		
+		@OneToMany(mappedBy = "user")
+		private List<Clase> clases;
+		
+
 
 		public Integer getId() {
 			return id;
@@ -119,9 +125,26 @@ public class User {
 		}
 
 		public void agregar(Role tempRole) {
-			if (roles == null) {
+			if(roles == null) {
 				roles = new LinkedList<>();
 			}
+			
 			roles.add(tempRole);
 		}
+
+		public List<Clase> getClases() {
+			return clases;
+		}
+
+		public void setClases(List<Clase> clases) {
+			this.clases = clases;
+		}
+
+		@Override
+		public String toString() {
+			return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
+					+ ", email=" + email + ", password=" + password + ", estatus=" + estatus + ", fechaRegistro="
+					+ fechaRegistro + ", roles=" + roles + ", clases=" + clases + "]";
+		}
+	
 }

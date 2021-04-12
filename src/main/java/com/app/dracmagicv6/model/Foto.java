@@ -1,9 +1,12 @@
 package com.app.dracmagicv6.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +18,8 @@ public class Foto {
 		private Integer id;
 		private String descripcion;
 
+		@ManyToMany(mappedBy = "fotos")
+		private List<Alumno> alumnos;
 		
 		public Integer getId() {
 			return id;
@@ -29,10 +34,18 @@ public class Foto {
 		public void setDescripcion(String descripcion) {
 			this.descripcion = descripcion;
 		}
+
+		public List<Alumno> getAlumnos() {
+			return alumnos;
+		}
+
+		public void setAlumnos(List<Alumno> alumnos) {
+			this.alumnos = alumnos;
+		}
+
 		@Override
 		public String toString() {
-			return "Foto [id=" + id + ", descripcion=" + descripcion + "]";
-		}
-		
+			return "Foto [id=" + id + ", descripcion=" + descripcion + ", alumnos=" + alumnos + "]";
+		}		
 
 }

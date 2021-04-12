@@ -1,88 +1,83 @@
-package com.app.dracmagicv6.service.db;
+package com.app.dracmagicv6.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dracmagicv6.model.User;
 import com.app.dracmagicv6.repository.UserRepository;
-import com.app.dracmagicv6.service.IUserService;
 
 @Service
-@Primary
-public class UserServiceJpa implements IUserService{
+public class UserService{
 
 	@Autowired
 	private UserRepository userRepo;
 	
-	@Override
-	public void guardar(User User) {
+
+	public void guardar(User User) {  // OK
 		userRepo.save(User);
 	}
 
-	@Override
-	public void eliminar(Integer idUser) {
-		userRepo.deleteById(idUser);
+	public void deleteUserById(Integer id) {
+		userRepo.deleteById(id);
 	}
 	
-	@Override
-	public List<User> buscarTodos() {
-		return userRepo.findAll();
-	}
-
-	@Override
-	public Page<User> buscarTodos(Pageable page) {
-		return userRepo.findAll(page);
-	}
-	
-	@Override
-	public List<User> getAllUsers() {
+	public List<User> getAllUsers(){
 		return userRepo.findAll();
 	}
 	
-	@Override
-	public Page<User> getAllUsers(Pageable page) {
-		return userRepo.findAll(page);
-	}
+	
+	// new version pagination
+	public Page<User> findAll(int pageNumber, String sortField, String sortDir) {
 
-	@Override
-	public User buscarPorId(Integer idUser) {
-		Optional<User> optional = userRepo.findById(idUser);
-		if (optional.isPresent()) {
-			return optional.get();
-		}
-		return null;
+		 Pageable pageable = PageRequest.of(pageNumber - 1, 5,
+				 sortDir.equals("asc")	? Sort.by(sortField).ascending()
+						 				: Sort.by(sortField).descending()
+			);		 
+							
+		return userRepo.findAll(pageable);
 	}
-
-	@Override
+	
 	public User buscarPorUsername(String username) {
 		return userRepo.findByUsername(username);
 	}
 
-	@Override
+
 	public List<User> buscarRegistrados() {		
 		return userRepo.findByFechaRegistroNotNull();
 	}
 
 	@Transactional
-	@Override
 	public int bloquear(int idUser) {
 		int rows = userRepo.lock(idUser);
 		return rows;
 	}
 
 	@Transactional
-	@Override
 	public int activar(int idUser) {
 		int rows = userRepo.unlock(idUser);
 		return rows;
 	}
+
+
+	public User getUserById(Integer id) {
+		Optional<User> optional = userRepo.findById(id);
+		User user = null;
+		if(optional.isPresent()) {
+			user = optional.get();
+		}else {
+			throw new RuntimeException(" Usuario no encontrado ");
+		}
+		return user;
+	}
+
 
 
 }

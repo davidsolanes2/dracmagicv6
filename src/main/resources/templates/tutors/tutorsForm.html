@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<body>
+		<aside  th:insert="fragments/header :: header"></aside>
+		<nav th:insert="fragments/menu :: menu-principal"></nav>
+		<main role="main">     
+	      <hr>
+	      <div class="container"> 
+	
+	        <div class="card">
+	          <h4 class="card-header"><strong>Formulario de alta de Tutors</strong></h4>              
+	          <div class="card-body">
+	            <form th:action="@{/saveTutors}" th:object="${tutor}" method="post">              
+	              <div class="row">
+	                <div class="col-md-3"> 
+	                  <div class="form-group">
+	                    <label for="nombre">Nombre</label>
+	                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" placeholder="Su nombre" required="required">
+	                  	<label for="lastName">Apellidos</label>
+	                    <input type="text" class="form-control" th:field="*{apellidos}" id="apellidos" name="apellidos" placeholder="Su apellido" required="required">
+	                  </div>
+	                </div>
+	               
+	                <div class="col-md-3"> 
+	                  <div class="form-group">
+	                    
+	                  </div>
+	                </div>
+	              </div>                  
+	              <hr>
+	              	
+	              		<button type="submit" class="btn btn-primary">Guardar</button>
+	              		<a th:href ="@{/user/indexPaginate}" class="btn btn-primary">Tornar</a>
+	              		
+	              		           
+	            </form>
+	           
+	          </div>
+	        </div>
+	      </div> <!-- /container -->
+
+        </main>
+	</body>
+	
+</html>
