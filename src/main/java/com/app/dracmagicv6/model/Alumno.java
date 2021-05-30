@@ -28,9 +28,11 @@ public class Alumno {
 	private String direccion;
 	private String codigo_postal;
 	private String poblacion;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date fecha_nacimiento;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha_alta;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha_baja;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -87,6 +89,13 @@ public class Alumno {
 	public void setPoblacion(String poblacion) {
 		this.poblacion = poblacion;
 	}
+	
+	public Date getFecha_nacimiento() {
+		return fecha_nacimiento;
+	}
+	public void setFecha_nacimiento(Date fecha_nacimiento) {
+		this.fecha_nacimiento = fecha_nacimiento;
+	}
 	public Date getFecha_alta() {
 		return fecha_alta;
 	}
@@ -99,6 +108,7 @@ public class Alumno {
 	public void setFecha_baja(Date fecha_baja) {
 		this.fecha_baja = fecha_baja;
 	}
+	
 	public List<Clase> getClases() {
 		return clases;
 	}
@@ -126,11 +136,9 @@ public class Alumno {
 	@Override
 	public String toString() {
 		return "Alumno [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion
-				+ ", codigo_postal=" + codigo_postal + ", poblacion=" + poblacion + ", fecha_alta=" + fecha_alta
-				+ ", fecha_baja=" + fecha_baja + ", clases=" + clases + ", tutors=" + tutors + ", fotos=" + fotos
-				+ ", informes=" + informes + "]";
+				+ ", codigo_postal=" + codigo_postal + ", poblacion=" + poblacion + ", fecha_nacimiento="
+				+ fecha_nacimiento + ", fecha_alta=" + fecha_alta + ", fecha_baja=" + fecha_baja + ", clases=" + clases
+				+ ", tutors=" + tutors + ", fotos=" + fotos + ", informes=" + informes + "]";
 	}
 
-	
-	
 }

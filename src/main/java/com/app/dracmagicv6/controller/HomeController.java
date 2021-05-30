@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.dracmagicv6.model.Alumno;
+import com.app.dracmagicv6.model.Clase;
 import com.app.dracmagicv6.model.Role;
 import com.app.dracmagicv6.model.User;
 import com.app.dracmagicv6.service.AlumnoService;
+import com.app.dracmagicv6.service.ClaseService;
 import com.app.dracmagicv6.service.UserService;
 
 @Controller
@@ -32,6 +34,9 @@ public class HomeController {
 	
 	@Autowired
 	private AlumnoService serviceAlumno;
+	
+	@Autowired
+	private ClaseService serviceClase;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -152,7 +157,31 @@ public class HomeController {
 		return "alumnes/alumnesForm";
 	}
     
+    //Atención averiguar por que solo me funciona en HomeController
+    @PostMapping("/saveAlumnes")
+    public String guardarAlumno(Alumno alumno, RedirectAttributes attributes) {
+		serviceAlumno.guardar(alumno);
+		return "redirect:/alumnes/indexPaginateAlumnos";
+	}
     
+    //Atención averiguar por que solo me funciona en HomeController
+    @GetMapping("/saveClases")
+	public String mostrarForm(Clase clase) {
+		return "gestio/clasesForm";
+	}
+    
+  //Atención averiguar por que solo me funciona en HomeController
+    @PostMapping("/saveClases")
+    public String guardarClase(Clase clase, RedirectAttributes attributes) {
+		serviceClase.guardar(clase);
+		return "redirect:/alumnes/indexPaginateAlumnos";
+	}
+    
+    //Atención averiguar por que solo me funciona en HomeController
+    @GetMapping("/saveRoles")
+	public String mostrarForm(Role Role) {
+		return "gestio/rolesForm";
+	}
     
     @GetMapping("/showFormForUpdate/{id}")
 	public String UserUpdate(@PathVariable(value = "id") Integer id, Model model) {
@@ -188,6 +217,22 @@ public class HomeController {
     	this.service.deleteUserById(id);
     	return "redirect:/usuaris/indexPaginate";
     }
+    
+    @GetMapping("/showFormForUpdateAlumno/{id}")
+	public String AlumnoUpdate(@PathVariable(value = "id") Integer id, Model model) {
+		Alumno alumno = serviceAlumno.getAlumnoById(id);
+		model.addAttribute("alumno", alumno);
+		return "alumnes/alumnnesUpdate";
+    }
+    
+    @PostMapping("/showFormForUpdateAlumno/{id}")
+    public String updateAlumno(@RequestParam("id") Integer id, Alumno alumno){
+    	
+  		
+    		serviceAlumno.guardar(alumno);
+    	
+		return "redirect:/alumnes/indexPaginate";
+	}
     
 	/**
 	 * Método personalizado para cerrar la sesión del usuario

@@ -19,27 +19,27 @@
 						<thead>
 							<tr>
 								<th>
-									<a th:href="@{'/alumnes/indexPaginate/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+									<a th:href="@{'/alumnes/indexPaginateAlumnos/' + ${currentPage} + '?sortField=nombre&sortDir=' + ${reverseSortDir}}">
 										Nombre
 									</a>
 								</th>
 								<th>
-									<a th:href="@{'/alumnes/indexPaginate/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
-										1º Apellido
+									<a th:href="@{'/alumnes/indexPaginateAlumnos/' + ${currentPage} + '?sortField=apellidos&sortDir=' + ${reverseSortDir}}">
+										Apellidos
 									</a>
 								</th>
 								<th>
-									<a th:href="@{'/alumnes/indexPaginate/' + ${currentPage} + '?sortField=username&sortDir=' + ${reverseSortDir}}">
-										2º Apellido
+									<a th:href="@{'/alumnes/indexPaginateAlumnos/' + ${currentPage} + '?sortField=direccion&sortDir=' + ${reverseSortDir}}">
+										Direccion
 									</a>
 								</th>
 								<th>
-									<a th:href="@{'/alumnes/indexPaginate/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+									<a th:href="@{'/alumnes/indexPaginateAlumnos/' + ${currentPage} + '?sortField=clase&sortDir=' + ${reverseSortDir}}">
 										Clase
 									</a>
 								</th>
 								<th>
-									<a th:href="@{'/alumnes/indexPaginate/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+									<a th:href="@{'/alumnes/indexPaginateAlumnos/' + ${currentPage} + '?sortField=edad&sortDir=' + ${reverseSortDir}}">
 										Edad
 									</a>
 								</th>
@@ -50,11 +50,11 @@
 							<tr th:each="alumno : ${listAlumno}">
 								<td th:text="${alumno.nombre}"></td>
 								<td th:text="${alumno.apellidos}"></td>
-								<td th:text="${alumno.direccion}"></td>
-								<td th:text="${alumno.codigo_postal}"></td>
+								<td th:text="${alumno.clase}"></td>
+								<td th:text="${alumno.edad}"></td>
 								<td>
-<!-- 									<a th:href="@{/showFormForUpdate/{id}(id=${user.id})}" class="btn btn-primary btn-sm">Modificar</a> -->
-<!-- 									<a th:href="@{/deleteUser/{id}(id=${user.id})}" class="btn btn-danger btn-sm">Eliminar</a>	 -->
+									<a th:href="@{/showFormForUpdateAlumno/{id}(id=${alumno.id})}" class="btn btn-primary btn-sm">Editar</a>
+<!-- 									<a th:href="@{/deleteAlumno/{id}(id=${alumno.id})}" class="btn btn-danger btn-sm">Eliminar</a>	 -->
 								</td>
 							</tr>
 						</tbody>
@@ -68,19 +68,19 @@
 						<nav aria-label="Page navigation">
 					    	<ul class="pagination justify-content-center">
 								<li class="page-item">
-									<a class="page-link" th:if="${currentPage > 1}" th:href="@{'/alumnes/indexPaginate/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" tabindex="-1" >Anterior</a>
+									<a class="page-link" th:if="${currentPage > 1}" th:href="@{'/alumnes/indexPaginateAlumnos/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" tabindex="-1" >Anterior</a>
 <!-- 									<span th:unless="${currentPage > 1}">Anterior</span> -->
 								</li>
 										<span th:each="i : ${#numbers.sequence(1 , totalPages)}">
 							    			<li class="page-item">
-							    				<a class="page-link" th:if="${i != currentPage}" th:href="@{'/alumnes/indexPaginate/' + ${i}} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}">[[${i}]]</a>	    		
+							    				<a class="page-link" th:if="${i != currentPage}" th:href="@{'/alumnes/indexPaginateAlumnos/' + ${i}} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}">[[${i}]]</a>	    		
 							    			</li>
 							    			<li class="page-item active">
 							    				<a class="page-link" th:unless="${i != currentPage}">[[${i}]]</a>
 							    			</li>
 							    		</span>
 							    <li class="page-item">
-										<a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/alumnes/indexPaginate/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Siguiente</a>
+										<a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/alumnes/indexPaginateAlumnos/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Siguiente</a>
 <!-- 										<span th:unless="${currentPage < totalPages}">Siguiente</span> -->
 							    </li>
 							</ul>

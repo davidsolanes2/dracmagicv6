@@ -1,5 +1,7 @@
 package com.app.dracmagicv6.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,5 +28,16 @@ public class AlumnoService {
 									  : Sort.by(sortField).descending()
 		);
 		return alumnoRepo.findAll(pageable);
+	}
+	
+	public Alumno getAlumnoById(Integer id) {
+		Optional<Alumno> optional = alumnoRepo.findById(id);
+		Alumno alumno = null;
+		if(optional.isPresent()) {
+			alumno = optional.get();
+		}else {
+			throw new RuntimeException(" Usuario no encontrado ");
+		}
+		return alumno;
 	}
 }

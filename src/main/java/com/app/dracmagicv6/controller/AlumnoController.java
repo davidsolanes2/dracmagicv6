@@ -23,12 +23,12 @@ public class AlumnoController {
 //	@Autowired
 //	private PasswordEncoder passwordEncoder;
 	
-	@RequestMapping("/indexPaginate")
+	@RequestMapping("/indexPaginateAlumnos")
 	public String viewListPaginateAlumnos(Model model) {
 		return listByPage(model, 1, "nombre", "asc");
 	}
 	
-	@RequestMapping("/indexPaginate/{pageNumber}")
+	@RequestMapping("/indexPaginateAlumnos/{pageNumber}")
 	public String listByPage(Model model, @PathVariable("pageNumber") int currentPage,
 			@Param("sortField") String sortField, @Param("sortDir") String sortDir) {
 		
@@ -60,7 +60,7 @@ public class AlumnoController {
 //		return "alumnes/alumnesForm";
 //	}
 	
-//	@GetMapping("/saveAlumnes")
+//	@PostMapping("/saveAlumnes")
 //	public String guardarAlumno(Alumno alumno, RedirectAttributes attributes) {
 //		serviceAlumno.guardar(alumno);
 //		return "redirect:/alumnes/alumnesIndex";

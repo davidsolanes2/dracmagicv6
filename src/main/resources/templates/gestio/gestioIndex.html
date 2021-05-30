@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<title>Gestio</title>
-	</head>
+
 	<body>
-		<div>
-			<h1>Vista de la pantalla de Altas/Modificaciones de Gestio</h1>
-		</div>
+		
+		<aside  th:insert="fragments/header :: header"></aside>
+		<nav th:insert="fragments/menu :: menu-principal"></nav>
+		<main role="main">     
+	      <hr>
+	      <div class="container"> 
+	
+	        <div class="card">
+	        	<h4 class="card-header"><strong>Gestion de Dracmagic App</strong></h4>              
+	          	<div class="card-body">
+	        	
+	        		<div class="row">
+	        			<div class="col-md-3">
+	        				<div class="form-group">
+	              				<a th:href ="@{/saveClases/}" class="btn btn-primary">Clases</a>
+	        				</div>
+	        			</div>
+	        			<div class="col-md-3">
+	        				<div class="form-group">
+	        					<a th:href ="@{/saveRoles/}" class="btn btn-primary">Roles</a>
+	        				</div>
+	        			</div>
+	        		</div>
+	                
+	                <hr>
+	                <a th:href ="@{/index}" class="btn btn-primary">Tornar</a>
+	                
+	          </div>
+	        </div>
+	      </div> <!-- /container -->
+
+        </main>
+		
 	</body>
 </html>
