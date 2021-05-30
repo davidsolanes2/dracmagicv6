@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<body>
+		<aside  th:insert="fragments/header :: header"></aside>
+		<nav th:insert="fragments/menu :: menu-principal"></nav>
+		<main role="main">     
+	      <hr>
+	      <div class="container"> 
+	
+	        <div class="card">
+	          <h4 class="card-header"><strong>Formulario de alta de Roles</strong></h4>              
+	          <div class="card-body">
+	            <form th:action="@{/saveRoles}" th:object="${role}" method="post">              
+	              <div class="row">
+	                <div class="col-md-3"> 
+	                  <div class="form-group">
+	                    <label for="name">Nombre</label>
+	                    <input type="text" class="form-control" th:field="*{name}" id="name" name="name" placeholder="Nombre" required="required">
+	                  	
+	                  </div>
+	                </div>
+	                <div class="col-md-3"> 
+	                 
+	                </div>    
+	                
+	                <div class="col-md-3"> 
+	                  <div class="form-group">
+
+	                  </div>
+	                </div>
+	              </div>                  
+	              <hr>
+	              	
+	              		<button type="submit" class="btn btn-primary">Guardar</button>
+	              		<a th:href ="@{/gestio/index}" class="btn btn-primary">Tornar</a>
+	              		
+	              		           
+	            </form>
+	           
+	          </div>
+	        </div>
+	      </div> <!-- /container -->
+
+        </main>
+	</body>
+	
+</html>
