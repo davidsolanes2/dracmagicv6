@@ -48,7 +48,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
         			 "/login",
         			 "/signup",
         			 "/usuaris/**",
-        			 "/alumnes/**",
         			 "/bcrypt/**",
         			 "/about").permitAll()
         

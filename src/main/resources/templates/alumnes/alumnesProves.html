@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<aside th:insert="fragments/header :: header"></aside>
+		<title>Listado de pruebas</title>
+	</head>
+	<body>
+		<div class="continer my-2">
+			<table class="table table-dark table-hover table-responsive-md">
+				<thead>
+					<tr>
+						<th>
+							<a th:href="@{'/alumnes/llistatAlumnes/' + ${currentPage} + '?sortField=nombre&sortDir=' + ${reverseSortDir}}">Nombre</a>
+						</th>
+						<th>
+							<a th:href="@{'/alumnes/llistatAlumnes/' + ${currentPage} + '?sortField=apellidos&sortDir=' + ${reverseSortDir}}">Apellidos</a>
+						</th>
+						<th>
+							<a th:href="@{'/alumnes/llistatAlumnes/' + ${currentPage} + '?sortField=direccion&sortDir=' + ${reverseSortDir}}">Direccion</a>
+						</th>
+						<th>
+							<a href="">Edad</a>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="alumno : ${listEspecial}">
+						<td	th:text="${alumno.nombre}"></td>
+						<td	th:text="${alumno.apellidos}"></td>
+						<td th:text="${alumno.direccion}"></td>					
+						<td id="">
+							<p th:text="${#dates.year(#dates.createNow())}-${#dates.year(alumno.fecha_nacimiento)}"></p>
+						</td>
+
+					</tr>
+				</tbody>
+			</table>
+			
+
+		</div>
+		
+		<div class="continer my-2">
+			<a th:href ="@{/}" class="btn btn-primary">Tornar</a>
+		</div>
+	</body>
+</html>

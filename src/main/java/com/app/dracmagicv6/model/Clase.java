@@ -25,7 +25,7 @@ public class Clase {
 	private String name;
 	
 	private String nombre_profesor;
-	@DateTimeFormat(pattern ="dd-MM-yyyy")
+	@DateTimeFormat(pattern ="yyyy-MM-dd")
 	private Date year;
 	
 	/*

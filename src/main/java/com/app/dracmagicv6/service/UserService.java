@@ -11,7 +11,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.dracmagicv6.model.Clase;
 import com.app.dracmagicv6.model.User;
+import com.app.dracmagicv6.repository.ClaseRepository;
 import com.app.dracmagicv6.repository.UserRepository;
 
 @Service
@@ -20,7 +22,9 @@ public class UserService{
 	@Autowired
 	private UserRepository userRepo;
 	
-
+	@Autowired
+	private ClaseRepository claseRepo;
+	
 	public void guardar(User User) {  // OK
 		userRepo.save(User);
 	}
@@ -78,6 +82,12 @@ public class UserService{
 		return user;
 	}
 
+//	public List<User> listaClase() {
+//		return userRepo.findAll();
+//	}
 
+	public Clase insertaClase(Clase obj) {
+		return claseRepo.save(obj);
+	}
 
 }

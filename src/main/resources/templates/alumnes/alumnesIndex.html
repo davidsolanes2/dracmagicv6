@@ -8,7 +8,7 @@
 	<body>
 		<div class="container my-2">
 			<h1>Llista d'Alumnes</h1>
-				<a th:href ="@{/saveAlumnes}" class="btn btn-primary btn-sm mb-3">Alta Alumne</a>
+				<a th:href ="@{/alumnes/saveAlumnes}" class="btn btn-primary btn-sm mb-3">Alta Alumne</a>
 				<!-- Busqueda de año para listar alumnos por año -->
 				
 				<select name="" id="">
@@ -39,9 +39,9 @@
 									</a>
 								</th>
 								<th>
-									<a th:href="@{'/alumnes/indexPaginateAlumnos/' + ${currentPage} + '?sortField=edad&sortDir=' + ${reverseSortDir}}">
-										Edad
-									</a>
+<!-- 									<a th:href="@{'/alumnes/indexPaginateAlumnos/' + ${currentPage} + '?sortField=edadsortDir=' + ${reverseSortDir}}"> -->
+<!-- 										Edad -->
+<!-- 									</a> -->
 								</th>
 								<th>Accions</th>
 							</tr>
@@ -50,8 +50,15 @@
 							<tr th:each="alumno : ${listAlumno}">
 								<td th:text="${alumno.nombre}"></td>
 								<td th:text="${alumno.apellidos}"></td>
+								<td th:text="${alumno.direccion}"></td>
+								<td th:text=" -- "></td>
+								<!--  
+									*** seleccionamos la clase que esta dada de alta
 								<td th:text="${alumno.clase}"></td>
+								-->
+								<!--
 								<td th:text="${alumno.edad}"></td>
+								-->
 								<td>
 									<a th:href="@{/showFormForUpdateAlumno/{id}(id=${alumno.id})}" class="btn btn-primary btn-sm">Editar</a>
 <!-- 									<a th:href="@{/deleteAlumno/{id}(id=${alumno.id})}" class="btn btn-danger btn-sm">Eliminar</a>	 -->

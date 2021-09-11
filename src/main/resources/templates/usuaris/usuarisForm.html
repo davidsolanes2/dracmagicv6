@@ -11,7 +11,7 @@
 	        <div class="card">
 	          <h4 class="card-header"><strong>Formulario de alta de Usuarios</strong></h4>              
 	          <div class="card-body">
-	            <form th:action="@{/saveUsuaris}" th:object="${user}" method="post">              
+	            <form th:action="@{/usuaris/saveUsuaris}" th:object="${user}" method="post">              
 	              <div class="row">
 	                <div class="col-md-3"> 
 	                  <div class="form-group">
@@ -37,7 +37,12 @@
 	                </div>
 	                <div class="col-md-3"> 
 	                  <div class="form-group">
-	                    
+	                    <label class="col-md-3" for="clase">Clase</label>
+<!-- 	                  	<select th:field="*{clase}" class="form-control form-control-sm col-md-6" id="clase"> -->
+<!-- 	                  		<option th:each="clase:${clases}" -->
+<!-- 	                  				th:value="${clase.id}" -->
+<!-- 	                  				th:text="${clase.nombre}"></option> -->
+<!-- 	                  	</select> -->
 	                  </div>
 	                </div>
 	              </div>                  

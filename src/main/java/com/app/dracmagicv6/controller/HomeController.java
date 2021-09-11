@@ -122,34 +122,7 @@ public class HomeController {
 		return "formLogin";
 	}
 	
-	@GetMapping("/saveUsuaris")
-	public String registrarUser(User user) {
-		return "usuaris/usuarisForm";
-	}  
-    
-    @PostMapping("/saveUsuaris")
-	public String guardarUser(User user, RedirectAttributes attributes) {
-		// Recuperamos el password en texto plano
-		String pwdPlano = user.getPassword();
-		// Encriptamos el pwd BCryptPasswordEncoder
-		String pwdEncriptado = passwordEncoder.encode(pwdPlano); 
-		// Hacemos un set al atributo password (ya viene encriptado)
-		user.setPassword(pwdEncriptado);	
-		user.setEstatus(1); // Activado por defecto
-		user.setFechaRegistro(new Date()); // Fecha de Registro, la fecha actual del servidor
-		
-		// Creamos el Role que le asignaremos al usuario nuevo
-		Role role = new Role();
-		role.setId(3); // Role USUARIO
-		user.agregar(role);
 	
-		/**
-		 * Guardamos el usuario en la base de datos. El Perfil se guarda automaticamente
-		 */
-		service.guardar(user);
-				  
-		return "redirect:/usuaris/indexPaginate";
-	}
     
     //Atención averiguar por que solo me funciona en HomeController
     @GetMapping("/saveAlumnes")
@@ -157,12 +130,7 @@ public class HomeController {
 		return "alumnes/alumnesForm";
 	}
     
-    //Atención averiguar por que solo me funciona en HomeController
-    @PostMapping("/saveAlumnes")
-    public String guardarAlumno(Alumno alumno, RedirectAttributes attributes) {
-		serviceAlumno.guardar(alumno);
-		return "redirect:/alumnes/indexPaginateAlumnos";
-	}
+   
     
     //Atención averiguar por que solo me funciona en HomeController
     @GetMapping("/saveClases")
@@ -182,35 +150,6 @@ public class HomeController {
 	public String mostrarForm(Role Role) {
 		return "gestio/rolesForm";
 	}
-    
-    @GetMapping("/showFormForUpdate/{id}")
-	public String UserUpdate(@PathVariable(value = "id") Integer id, Model model) {
-		User user = service.getUserById(id);
-		model.addAttribute("user", user);
-		return "usuaris/usuarisUpdate";
-	}
-    
-    @PostMapping("/showFormForUpdate/{id}")
-    public String updateUser(@RequestParam("id") Integer id, User user){
-    	
-  		String pwdPlano = user.getPassword();
-    	String pwdEncriptado = passwordEncoder.encode(pwdPlano); 
-    		// Hacemos un set al atributo password (ya viene encriptado)
-    	user.setPassword(pwdEncriptado);	
-   		user.setEstatus(1); // Activado por defecto
- 		user.setFechaRegistro(new Date()); // Fecha de Registro, la fecha actual del servidor			
- 			// Creamos el Role que le asignaremos al usuario nuevo
-    	Role role = new Role();
- 		role.setId(3); // Role USUARIO
- 		user.agregar(role); 		
-   			/**
-    		 * Guardamos el usuario en la base de datos. El Perfil se guarda automaticamente
-    		 */
-    		service.guardar(user);
-    	
-		return "redirect:/usuaris/indexPaginate";
-	}
- 
 
     @GetMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable (value= "id") Integer id, Model model) {
@@ -227,7 +166,6 @@ public class HomeController {
     
     @PostMapping("/showFormForUpdateAlumno/{id}")
     public String updateAlumno(@RequestParam("id") Integer id, Alumno alumno){
-    	
   		
     		serviceAlumno.guardar(alumno);
     	
